@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Chat App{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Chat App</h1>
+        {% if user.is_authenticated %}
+            <p>Logged in as: {{ user.username }}</p>
+            <a href="{% url 'home' %}"><button>Home</button></a>
+            <a href="{% url 'incoming_messages' %}"><button>Incoming Messages</button></a>
+            <a href="{% url 'sent_messages' %}"><button>Sent Messages</button></a>
+            <a href="{% url 'send_message' %}"><button>Send Message</button></a>
+            <a href="{% url 'logout' %}"><button>Logout</button></a>
+        {% else %}
+            <a href="{% url 'login' %}"><button>Login</button></a>
+            <a href="{% url 'register' %}"><button>Register</button></a>
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Chat App</p>
+    </footer>
+</body>
+</html>

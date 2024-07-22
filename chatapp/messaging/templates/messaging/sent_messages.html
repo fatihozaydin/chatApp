@@ -1,0 +1,21 @@
+{% extends 'messaging/base.html' %}
+
+{% block title %}Sent Messages{% endblock %}
+
+{% block content %}
+    <h2>Sent Messages</h2>
+    <ul>
+        {% for message in messages %}
+            <li>
+                <p><strong>To:</strong> {{ message.recipient.username }}</p>
+                <p>{{ message.content }}</p>
+                <form method="post" action="{% url 'delete_message' message.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <p>No sent messages.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
